@@ -6,6 +6,27 @@
 * Instructor name: *Christine Kirimi*<br>
 
 # Measuring Public Perception of Apple and Google Products on Twitter
+
+<details>
+<summary>📑 Table of Contents</summary>
+
+1. [Project Overview](#1-project-overview)  
+2. [Business Problem](#2-business-problem)  
+3. [Dataset Understanding](#3-data-understanding)  
+4. [Data Cleaning and Preparation](#4-data-cleaning-and-preparation)  
+   4.1 [Exploratory Data Analysis (EDA)](#41-exploratory-data-analysis)
+5. [Modeling](#5-modeling)  
+   5.1 [Logistic Regression Classifier](#51-logistic-regression-classifier)  
+   5.2 [Random Forest](#52-random-forest-classifier)  
+   5.3 [Support Vector Machine (SVM) Classifier](#53-support-vector-machine-classifier)  
+   5.4 [XGBoost Classifier](#54-xgboost-classifier)  
+6. [Model Evaluation and Interpretation](#6-model-evaluation-and-interpretation)  
+   6.1 [Key Insights](61-key-insights)
+7. [Recommendations](#7-recommendations)
+
+</details>
+
+---
 ## 1. Project Overview
 The aim of this project is to build a Natural Language Processing (NLP) model to classify tweets mentioning Apple or Google into positive, negative, or neutral sentiments. This will help understand public perception, monitor brand reputation, and inform marketing and product strategies.<br>
 This project will enable businesses to:
@@ -27,7 +48,7 @@ For this analysis, we used the [crowdflower dataset](https://data.world/crowdflo
 
 ## 4. Data Cleaning and Preparation
 1. **Dropping unwanted columns**: Retained only the columns that contain the tweets and the sentiment label.
-2. **Handling Missing Values**: Dropped rows with missing sentiment labels and replaced missin values in the tweet column with appropriate placeholders.
+2. **Handling Missing Values**: Dropped rows with missing sentiment labels and replaced missing values in the tweet column with appropriate placeholders.
 3. **Renaming Columns**: Columns were renamed to make them more intuitive.
 4. **Removing Unwanted Sentiment Categories**: Retained only the tweets that are labelled as having either positive, negative or neutral sentiment.
 5. **Cleaning Text Data**: Converted text to lowercase. Removed URLs, mentions, hashtags, punctuation marks, numbers, whitespace. Removed stopwords.
@@ -75,7 +96,7 @@ The Logistic Regression Classifier achieved a test accuracy of 65%.
 |`neutral`| 0.76 | 0.70 | 0.73 |
 
 ### 5.2 Random Forest Classifier
-A random forest classifier was built to analyse the same features and classify the tweets into one f the three classes. In this case, the sentiment labels were converted to numbers using a label encoder since a random forest model can only work with numerical data.<br>
+A random forest classifier was built to analyze the same features and classify the tweets into one of the three classes. In this case, the sentiment labels were converted to numbers using a label encoder since a random forest model can only work with numerical data.<br>
 negative -> 0 <br>
 neutral -> 1 <br>
 positive -> 2 <br>
@@ -133,3 +154,63 @@ The Random Forest Classifier achieved a test accuracy of 67%.
 |`neutral`| 0.68 | 0.89 | 0.77 |
 
 ## 6. Model Evaluation and Interpretation
+#### Model Performance Per Class
+#### Positive Tweets
+|Model  | Precision| Recall | F1-Score | Accuracy |
+|---|---|---|---|---|
+|Logistic Regression|0.57|0.60|0.59|59.7%|
+|Random Forest|0.62|0.42|0.50|42.45%|
+|SVM|0.57|0.60|0.59|60.4%|
+|XGBoost|0.63|0.37|0.47|37.25%|
+
+#### Negative Tweets
+|Model  | Precision| Recall | F1-Score | Accuracy |
+|---|---|---|---|---|
+|Logistic Regression|0.33|0.51|0.40|50.9%|
+|Random Forest|0.58|0.19|0.29|19.3%|
+|SVM|0.31|0.54|0.40|54.39%|
+|XGBoost|0.58|0.10|0.17|9.65%|
+
+#### Neutral Tweets
+|Model  | Precision| Recall | F1-Score | Accuracy |
+|---|---|---|---|---|
+|Logistic Regression|0.76|0.70|0.73|70.1%|
+|Random Forest|0.69|0.86|0.77|86.18%|
+|SVM|0.76|0.68|0.72|67.63%|
+|XGBoost|0.68|0.89|0.77|89.42%|
+
+### 6.1 Key Insights
+- Logistic Regression and SVM models did a better job at classifying the minority classes (Positive & Negative tweets). This is indicated by the higher F1-Scores compared to the other models.
+- Similarly, based on the F1-Scores, XGBoost & Random Forest did a better job at classifying the neutral tweets.
+- The class imbalance causes models to favor the majority class - Neutral, hurting minority classes.
+
+## 7. Recommendations
+### 1. Immediate Implementation Strategy
+- **Use Logistic Regression or SVM** as the primary model due to their balanced performance across all sentiment classes.
+- **Set up sentiment alerts** to detect spikes in negative sentiment early, compensating for the 51–54% recall rate on negative tweets.
+
+### 2. Data Collection & Model Improvement
+- **Collect more negative sentiment data** to fix severe class imbalance (only 6.4% negative tweets).
+- **Apply class balancing techniques** such as SMOTE or class weighting to improve minority class detection.
+- **Enhance feature engineering** with emojis, punctuation, capitalization, and better embeddings to reduce confusion between Negative and Neutral tweets.
+
+### 3. Marketing Strategy Applications
+- **Compare Apple vs Google sentiment** directly to identify brand-specific perception differences.
+- **Track sentiment during product launches** to measure campaign success or detect rising issues.
+- **Extract high-impact keywords** to guide marketing language, ad copy, and content creation.
+
+### 4. Customer Support Optimization
+- **Prioritize negative tweets** using a sentiment-based routing system for faster response.
+- **Use a two-stage system**: automatic model screening + human review for borderline cases to improve accuracy.
+
+### 5. Product Development Intelligence
+- **Analyze sentiment by product features** to pinpoint what users love or dislike.
+- **Identify recurring negative themes** (bugs, complaints, frustrations) for roadmap and quality improvements.
+
+### 6. Long-term Strategic Initiatives
+- **Retrain models quarterly** to adapt to evolving social media language and trends.
+- **Explore advanced NLP models** like BERT for improved contextual understanding.
+- **Create brand-specific sentiment models** for Apple and Google to capture unique vocabulary and patterns.
+- **Build real-time dashboards** showing sentiment trends, alerts, and activity for executives and marketing teams.
+
+[def]: #4.1-exploratory-data-analysis
