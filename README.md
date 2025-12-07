@@ -1,7 +1,7 @@
 # Phase 4 Project
 
 * Group: *Group 1*<br>
-* Student names: *Faith Kanyuki, Marybennah Kuloba, Sharon Thiga, Sharon Maina*<br>
+* Student names: *Faith Kanyuki, MaryBennah Nasimiyu Kuloba, Sharon Thiga, Sharon Maina*<br>
 * Student pace: *Part Time*<br>
 * Instructor name: *Christine Kirimi*<br>
 
